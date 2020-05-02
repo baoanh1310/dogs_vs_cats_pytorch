@@ -8,7 +8,8 @@ WIDTH = 150
 HEIGHT = 150
 
 BATCH_SIZE = 20
-NUM_EPOCHS = 100
+NUM_EPOCHS = 2
 MEAN = 1./255
+STD = 1.0
 
 save_path = './dogs_cats.pth'
