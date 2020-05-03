@@ -14,6 +14,8 @@ Environment: **Anaconda**, **Python 3.6**
 conda create -y --name py36 python==3.6
 conda install -f -y -q --name py36 -c conda-forge --file requirements.txt
 conda activate py36
+git clone https://github.com/baoanh1310/dogs_vs_cats_pytorch.git
+cd dogs_vs_cats_pytorch
 ```
 
 ### Running
