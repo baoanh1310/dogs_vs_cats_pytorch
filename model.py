@@ -13,7 +13,7 @@ class Net(nn.Module):
         self.conv4 = nn.Conv2d(128, 128, 3)
         self.dropout = nn.Dropout(p=0.5)
         self.fc1 = nn.Linear(128*7*7, 512)
-        self.fc2 = nn.Linear(512, 1)
+        self.fc2 = nn.Linear(512, 2)
 
     def forward(self, x):
         x = self.conv1(x)
@@ -26,16 +26,16 @@ class Net(nn.Module):
 
         x = self.conv3(x)
         x = F.relu(x)
-        x = max_pool2d(x, (2, 2))
+        x = F.max_pool2d(x, (2, 2))
 
         x = self.conv4(x)
         x = F.relu(x)
-        x = max_pool2d(x, (2, 2))
+        x = F.max_pool2d(x, (2, 2))
 
         x = x.view(-1, self.num_flat_features(x))
         x = self.dropout(x)
         x = F.relu(self.fc1(x))
-        x = F.sigmoid(self.fc2(x))
+        x = F.softmax(self.fc2(x))
 
         return x
 
@@ -47,7 +47,7 @@ class Net(nn.Module):
         return num_features
 
 
-def main():
+def build_model():
     train_list = make_datapath_list("train")
     val_list = make_datapath_list("val")
 
@@ -75,13 +75,4 @@ def main():
 
     # Training model
     # train_model(net, dataloader_dict, criterior, optimizer, NUM_EPOCHS)
-    
-    print(len(train_list))
-    print(len(val_list))
-
-
-if __name__ == "__main__":
-    main()
-
-    ## load model 
-    # load_model(net, save_path)
+    return net, dataloader_dict, criterior, optimizer

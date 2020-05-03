@@ -13,6 +13,7 @@ class ImageTransform():
                 transforms.Normalize(mean, std)
                 ]),
             'val': transforms.Compose([
+                transforms.Resize(resize),
                 transforms.ToTensor(),
                 transforms.Normalize(mean, std)
                 ]),
